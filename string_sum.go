@@ -59,12 +59,12 @@ func StringSum(input string) (output string, err error) {
 
 	firstItem, err := strconv.Atoi(string(firstAddenString))
 	if err != nil {
-		return "", errorEmptyInput
+		return "", errorNotTwoOperands
 	}
 
 	secItem, err := strconv.Atoi(string(secondAddenString))
 	if err != nil {
-		return "", errorEmptyInput
+		return "", errorNotTwoOperands
 	}
 
 	return strconv.Itoa(firstItem + secItem), err
