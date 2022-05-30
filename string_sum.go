@@ -4,7 +4,6 @@ import (
 	"errors"
 	"fmt"
 	"strconv"
-	"strings"
 	"unicode"
 )
 
@@ -61,18 +60,14 @@ func StringSum(input string) (output string, err error) {
 		}
 	}
 
-	if len(strings.Split(string(newOut), splitSymbol)) != 2 {
-		return "", errorNotTwoOperands
-	}
-
 	firstItem, err := strconv.ParseInt(string(firstAddenString), 10, 64)
 	if err != nil {
-		return "", fmt.Errorf("%w", err)
+		return "", fmt.Errorf("%w", errorNotTwoOperands)
 	}
 
 	secItem, err := strconv.ParseInt(string(secondAddenString), 10, 64)
 	if err != nil {
-		return "", fmt.Errorf("%w", err)
+		return "", fmt.Errorf("%w", errorNotTwoOperands)
 	}
 
 	return strconv.Itoa(int(firstItem) + int(secItem)), err
