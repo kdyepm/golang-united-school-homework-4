@@ -2,6 +2,9 @@ package string_sum
 
 import (
 	"errors"
+	"fmt"
+	"strconv"
+	"unicode"
 )
 
 //use these errors as appropriate, wrapping them with fmt.Errorf function
@@ -22,6 +25,52 @@ var (
 //
 // Use the errors defined above as described, again wrapping into fmt.Errorf
 
+// func main() {
+// 	st := "  13  -4 "
+// 	s, e := StringSum(st)
+// 	fmt.Println(s, e)
+// }
+
 func StringSum(input string) (output string, err error) {
-	return "", nil
+
+	firstAddenString, secondAddenString := "", ""
+
+	// clear from whitespaces:
+	out := []rune(input)
+	newOut := make([]rune, 0)
+	for k, _ := range out {
+		if !unicode.IsSpace(rune(input[k])) {
+			newOut = append(newOut, out[k])
+		}
+	}
+	if len(newOut) == 0 {
+		return "", errorEmptyInput
+	}
+	for i := len(newOut) - 1; i > 0; i-- {
+		if !unicode.IsDigit(rune(newOut[i])) {
+			if !unicode.IsDigit(rune(newOut[i-1])) {
+				err = fmt.Errorf("wrong operation please use either + or -: %v", errorNotTwoOperands)
+				return "", err
+			}
+
+			firstAddenString = string(newOut[:i])
+			secondAddenString = string(newOut[i:])
+			break
+		}
+	}
+
+	firstItem, err := strconv.Atoi(string(firstAddenString))
+	if err != nil {
+		err = fmt.Errorf("%v, %v", err, errorNotTwoOperands)
+		return "", err
+	}
+
+	secItem, err := strconv.Atoi(string(secondAddenString))
+	if err != nil {
+		err = fmt.Errorf("%v, %v", err, errorNotTwoOperands)
+		return "", err
+	}
+
+	return strconv.Itoa(firstItem + secItem), err
+
 }
