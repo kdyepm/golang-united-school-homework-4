@@ -44,12 +44,13 @@ func StringSum(input string) (output string, err error) {
 		}
 	}
 	if len(newOut) == 0 {
-		return "", errorEmptyInput
+		return "", fmt.Errorf("%w", errorEmptyInput)
 	}
 	for i := len(newOut) - 1; i > 0; i-- {
 		if !unicode.IsDigit(rune(newOut[i])) {
 			if !unicode.IsDigit(rune(newOut[i-1])) {
-				return "", errorNotTwoOperands
+				return "", fmt.Errorf("%w", errorNotTwoOperands)
+
 			}
 
 			firstAddenString = string(newOut[:i])
@@ -60,12 +61,12 @@ func StringSum(input string) (output string, err error) {
 
 	firstItem, err := strconv.Atoi(string(firstAddenString))
 	if err != nil {
-		return "", fmt.Errorf("%e,%e", err, errorNotTwoOperands)
+		return "", fmt.Errorf("%w", errorNotTwoOperands)
 	}
 
 	secItem, err := strconv.Atoi(string(secondAddenString))
 	if err != nil {
-		return "", fmt.Errorf("%e,%e", err, errorNotTwoOperands)
+		return "", fmt.Errorf("%w", errorNotTwoOperands)
 	}
 
 	return strconv.Itoa(firstItem + secItem), err
