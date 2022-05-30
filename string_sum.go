@@ -2,6 +2,7 @@ package string_sum
 
 import (
 	"errors"
+	"fmt"
 	"strconv"
 	"unicode"
 )
@@ -59,12 +60,12 @@ func StringSum(input string) (output string, err error) {
 
 	firstItem, err := strconv.Atoi(string(firstAddenString))
 	if err != nil {
-		return "", errorNotTwoOperands
+		return "", fmt.Errorf("%e,%e", err, errorNotTwoOperands)
 	}
 
 	secItem, err := strconv.Atoi(string(secondAddenString))
 	if err != nil {
-		return "", errorNotTwoOperands
+		return "", fmt.Errorf("%e,%e", err, errorNotTwoOperands)
 	}
 
 	return strconv.Itoa(firstItem + secItem), err
