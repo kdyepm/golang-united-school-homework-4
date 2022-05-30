@@ -59,16 +59,16 @@ func StringSum(input string) (output string, err error) {
 		}
 	}
 
-	firstItem, err := strconv.Atoi(string(firstAddenString))
+	firstItem, err := strconv.ParseInt(string(firstAddenString), 10, 64)
 	if err != nil {
 		return "", fmt.Errorf("%w", errorNotTwoOperands)
 	}
 
-	secItem, err := strconv.Atoi(string(secondAddenString))
+	secItem, err := strconv.ParseInt(string(secondAddenString), 10, 64)
 	if err != nil {
 		return "", fmt.Errorf("%w", errorNotTwoOperands)
 	}
 
-	return strconv.Itoa(firstItem + secItem), err
+	return strconv.Itoa(int(firstItem) + int(secItem)), err
 
 }
