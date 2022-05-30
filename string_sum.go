@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"strconv"
+	"strings"
 	"unicode"
 )
 
@@ -33,7 +34,7 @@ var (
 
 func StringSum(input string) (output string, err error) {
 
-	firstAddenString, secondAddenString := "", ""
+	splitSymbol, firstAddenString, secondAddenString := "", "", ""
 
 	// clear from whitespaces:
 	out := []rune(input)
@@ -55,8 +56,13 @@ func StringSum(input string) (output string, err error) {
 
 			firstAddenString = string(newOut[:i])
 			secondAddenString = string(newOut[i:])
+			splitSymbol = string(newOut[i])
 			break
 		}
+	}
+
+	if len(strings.Split(string(newOut), splitSymbol)) != 2 {
+		return "", errorNotTwoOperands
 	}
 
 	firstItem, err := strconv.ParseInt(string(firstAddenString), 10, 64)
