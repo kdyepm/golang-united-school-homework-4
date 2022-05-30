@@ -33,7 +33,7 @@ var (
 
 func StringSum(input string) (output string, err error) {
 
-	splitSymbol, firstAddenString, secondAddenString := "", "", ""
+	firstAddenString, secondAddenString := "", ""
 
 	// clear from whitespaces:
 	out := []rune(input)
@@ -55,7 +55,6 @@ func StringSum(input string) (output string, err error) {
 
 			firstAddenString = string(newOut[:i])
 			secondAddenString = string(newOut[i:])
-			splitSymbol = string(newOut[i])
 			break
 		}
 	}
