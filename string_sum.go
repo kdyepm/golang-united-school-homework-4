@@ -62,13 +62,13 @@ func StringSum(input string) (output string, err error) {
 
 	firstItem, err := strconv.Atoi(string(firstAddenString))
 	if err != nil {
-		err = fmt.Errorf("%v, %v", err, errorNotTwoOperands)
+		err = fmt.Errorf("please correct your input, %v", errorNotTwoOperands)
 		return "", err
 	}
 
 	secItem, err := strconv.Atoi(string(secondAddenString))
 	if err != nil {
-		err = fmt.Errorf("%v, %v", err, errorNotTwoOperands)
+		err = fmt.Errorf("please correct your input, %v", errorNotTwoOperands)
 		return "", err
 	}
 
