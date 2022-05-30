@@ -44,6 +44,7 @@ func StringSum(input string) (output string, err error) {
 		}
 	}
 	if len(newOut) == 0 {
+		err = fmt.Errorf("emty input%v", errorEmptyInput)
 		return "", errorEmptyInput
 	}
 	for i := len(newOut) - 1; i > 0; i-- {
