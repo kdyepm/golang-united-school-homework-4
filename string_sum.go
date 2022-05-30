@@ -2,7 +2,6 @@ package string_sum
 
 import (
 	"errors"
-	"fmt"
 	"strconv"
 	"unicode"
 )
@@ -44,14 +43,12 @@ func StringSum(input string) (output string, err error) {
 		}
 	}
 	if len(newOut) == 0 {
-		err = fmt.Errorf("emty input%v", errorEmptyInput)
 		return "", errorEmptyInput
 	}
 	for i := len(newOut) - 1; i > 0; i-- {
 		if !unicode.IsDigit(rune(newOut[i])) {
 			if !unicode.IsDigit(rune(newOut[i-1])) {
-				err = fmt.Errorf("wrong operation please use either + or -: %v", errorNotTwoOperands)
-				return "", err
+				return "", errorNotTwoOperands
 			}
 
 			firstAddenString = string(newOut[:i])
@@ -62,14 +59,12 @@ func StringSum(input string) (output string, err error) {
 
 	firstItem, err := strconv.Atoi(string(firstAddenString))
 	if err != nil {
-		err = fmt.Errorf("please correct your input, %v", errorNotTwoOperands)
-		return "", err
+		return "", errorEmptyInput
 	}
 
 	secItem, err := strconv.Atoi(string(secondAddenString))
 	if err != nil {
-		err = fmt.Errorf("please correct your input, %v", errorNotTwoOperands)
-		return "", err
+		return "", errorEmptyInput
 	}
 
 	return strconv.Itoa(firstItem + secItem), err
