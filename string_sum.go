@@ -4,7 +4,6 @@ import (
 	"errors"
 	"fmt"
 	"strconv"
-	"strings"
 	"unicode"
 )
 
@@ -27,7 +26,7 @@ var (
 // Use the errors defined above as described, again wrapping into fmt.Errorf
 
 // func main() {
-// 	st := "1+13+12"
+// 	st := "1+1"
 // 	s, e := StringSum(st)
 // 	fmt.Println(s, e)
 // }
@@ -47,29 +46,37 @@ func StringSum(input string) (output string, err error) {
 	if len(newOut) == 0 {
 		return "", fmt.Errorf("%w", errorEmptyInput)
 	}
-	for i := len(newOut) - 1; i > 0; i-- {
+	for i := len(newOut) - 1; i >= 0; i-- {
 		if !unicode.IsDigit(rune(newOut[i])) {
 			firstAddenString = string(newOut[:i])
-			// fmt.Println("first operand ", firstAddenString)
-
 			secondAddenString = string(newOut[i:])
-			// fmt.Println("second operand ", secondAddenString)
 			break
 		}
 	}
 
+	// checking if operands number is greater than 2(skipping first rune because it is a sign):
+	for j := len(secondAddenString) - 1; j >= 1; j-- {
+		_, err := strconv.Atoi(string(secondAddenString[j]))
+		if err != nil {
+			return "", fmt.Errorf("error in second operand: %w", err)
+		}
+	}
+
+	// checking if firs and second iperands are not empty strings
 	if len(firstAddenString) == 0 || len(secondAddenString) == 0 {
 		return "", fmt.Errorf("incorrect number of operands: %w", errorNotTwoOperands)
 	}
 
+	// checking if the first operand has letters by converting it to integer
 	firstItem, err := strconv.ParseInt(string(firstAddenString), 10, 64)
 	if err != nil {
-		if strings.IndexRune(firstAddenString[:], '-') > 0 || strings.IndexRune(firstAddenString[:], '+') > 0 {
-			return "", fmt.Errorf("incorrect number of operands: %w", errorNotTwoOperands)
-		}
+		// if strings.IndexRune(firstAddenString[:], '-') > 0 || strings.IndexRune(firstAddenString[:], '+') > 0 {
+		// 	return "", fmt.Errorf("incorrect number of operands: %w", errorNotTwoOperands)
+		// }
 		return "", fmt.Errorf("error in first operand: %w", err)
 	}
 
+	// checking if second operand has letters by converting it to integer
 	secItem, err := strconv.ParseInt(string(secondAddenString), 10, 64)
 	if err != nil {
 		err = fmt.Errorf("error in second operand: %w", err)
