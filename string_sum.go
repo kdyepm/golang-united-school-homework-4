@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"strconv"
+	"strings"
 	"unicode"
 )
 
@@ -70,9 +71,9 @@ func StringSum(input string) (output string, err error) {
 	// checking if the first operand has letters by converting it to integer
 	firstItem, err := strconv.ParseInt(string(firstAddenString), 10, 64)
 	if err != nil {
-		// if strings.IndexRune(firstAddenString[:], '-') > 0 || strings.IndexRune(firstAddenString[:], '+') > 0 {
-		// 	return "", fmt.Errorf("incorrect number of operands: %w", errorNotTwoOperands)
-		// }
+		if strings.IndexRune(firstAddenString[:], '-') > 0 || strings.IndexRune(firstAddenString[:], '+') > 0 {
+			return "", fmt.Errorf("incorrect number of operands: %w", errorNotTwoOperands)
+		}
 		return "", fmt.Errorf("error in first operand: %w", err)
 	}
 
