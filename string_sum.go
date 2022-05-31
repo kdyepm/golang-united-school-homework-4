@@ -56,7 +56,7 @@ func StringSum(input string) (output string, err error) {
 
 	firstItem, err := strconv.ParseInt(string(firstAddenString), 10, 64)
 	if err != nil {
-		err = fmt.Errorf("%w", errorNotTwoOperands)
+		//err = fmt.Errorf("%w", errorNotTwoOperands)
 		return "", err
 	}
 
