@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"strconv"
+	"strings"
 	"unicode"
 )
 
@@ -26,7 +27,7 @@ var (
 // Use the errors defined above as described, again wrapping into fmt.Errorf
 
 // func main() {
-// 	st := "  13e  - 4 - 5 "
+// 	st := "  -13e - 5 "
 // 	s, e := StringSum(st)
 // 	fmt.Println(s, e)
 // }
@@ -57,12 +58,15 @@ func StringSum(input string) (output string, err error) {
 
 	firstItem, err := strconv.ParseInt(string(firstAddenString), 10, 64)
 	if err != nil {
-		return "", fmt.Errorf("%w", err)
+		if strings.IndexRune(firstAddenString[1:], '-') > 0 || strings.IndexRune(firstAddenString[1:], '+') > 0 {
+			return "", errorNotTwoOperands
+		}
+		return "", fmt.Errorf("error in first operand: %w", err)
 	}
 
 	secItem, err := strconv.ParseInt(string(secondAddenString), 10, 64)
 	if err != nil {
-		err = fmt.Errorf("%w", err)
+		err = fmt.Errorf("error in second operand: %w", err)
 		return "", err
 	}
 
