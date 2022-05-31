@@ -26,7 +26,7 @@ var (
 // Use the errors defined above as described, again wrapping into fmt.Errorf
 
 // func main() {
-// 	st := "  13e  - 4 "
+// 	st := "  13e  - 4 - 5 "
 // 	s, e := StringSum(st)
 // 	fmt.Println(s, e)
 // }
@@ -48,11 +48,6 @@ func StringSum(input string) (output string, err error) {
 	}
 	for i := len(newOut) - 1; i > 0; i-- {
 		if !unicode.IsDigit(rune(newOut[i])) {
-			// if !unicode.IsDigit(rune(newOut[i-1])) {
-			// 	return "", fmt.Errorf("error two signs used %w", errorNotTwoOperands)
-
-			// }
-
 			firstAddenString = string(newOut[:i])
 			secondAddenString = string(newOut[i:])
 			break
@@ -61,15 +56,13 @@ func StringSum(input string) (output string, err error) {
 
 	firstItem, err := strconv.ParseInt(string(firstAddenString), 10, 64)
 	if err != nil {
-		err = fmt.Errorf("first adden error %w", errorNotTwoOperands)
-		// fmt.Println(errors.Unwrap(err))
-		return "first adden", err
+		err = fmt.Errorf("%w", errorNotTwoOperands)
+		return "", err
 	}
 
 	secItem, err := strconv.ParseInt(string(secondAddenString), 10, 64)
 	if err != nil {
-		err = fmt.Errorf("second adden error %w", errorNotTwoOperands)
-		// fmt.Println(errors.Unwrap(err))
+		err = fmt.Errorf("%w", errorNotTwoOperands)
 		return "", err
 	}
 
