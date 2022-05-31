@@ -77,12 +77,12 @@ func StringSum(input string) (output string, err error) {
 	}
 
 	// checking if operands number is greater than 2(skipping first rune because it is a sign):
-	for j := len(secondOperandString) - 1; j >= 1; j-- {
-		_, err := strconv.Atoi(string(secondOperandString[j]))
-		if err != nil {
-			return "", fmt.Errorf("error in second operand: %w", err)
-		}
-	}
+	// for j := len(secondOperandString) - 1; j >= 1; j-- {
+	// 	_, err := strconv.Atoi(string(secondOperandString[j]))
+	// 	if err != nil {
+	// 		return "", fmt.Errorf("error in second operand: %w", err)
+	// 	}
+	// }
 
 	// checking if firs and second iperands are not empty strings
 	if len(firstOperandString) == 0 || len(secondOperandString) == 0 {
