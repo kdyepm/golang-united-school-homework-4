@@ -33,7 +33,7 @@ var (
 
 func StringSum(input string) (output string, err error) {
 
-	firstAddenString, secondAddenString := "", "", ""
+	firstAddenString, secondAddenString := "", ""
 
 	// clear from whitespaces:
 	out := []rune(input)
