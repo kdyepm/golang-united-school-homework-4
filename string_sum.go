@@ -59,13 +59,13 @@ func StringSum(input string) (output string, err error) {
 	}
 
 	if len(firstAddenString) == 0 || len(secondAddenString) == 0 {
-		return "", errorNotTwoOperands
+		return "", fmt.Errorf("incorrect number of operands: %w", errorNotTwoOperands)
 	}
 
 	firstItem, err := strconv.ParseInt(string(firstAddenString), 10, 64)
 	if err != nil {
 		if strings.IndexRune(firstAddenString[:], '-') > 0 || strings.IndexRune(firstAddenString[:], '+') > 0 {
-			return "", errorNotTwoOperands
+			return "", fmt.Errorf("incorrect number of operands: %w", errorNotTwoOperands)
 		}
 		return "", fmt.Errorf("error in first operand: %w", err)
 	}
