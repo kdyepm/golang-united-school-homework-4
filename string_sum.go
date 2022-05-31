@@ -49,6 +49,7 @@ func StringSum(input string) (output string, err error) {
 	for i := len(newOut) - 1; i > 0; i-- {
 		if !unicode.IsDigit(rune(newOut[i])) {
 			firstAddenString = string(newOut[:i])
+
 			secondAddenString = string(newOut[i:])
 			break
 		}
@@ -56,13 +57,12 @@ func StringSum(input string) (output string, err error) {
 
 	firstItem, err := strconv.ParseInt(string(firstAddenString), 10, 64)
 	if err != nil {
-		//err = fmt.Errorf("%w", errorNotTwoOperands)
-		return "", err
+		return "", fmt.Errorf("%w", err)
 	}
 
 	secItem, err := strconv.ParseInt(string(secondAddenString), 10, 64)
 	if err != nil {
-		err = fmt.Errorf("%w", errorNotTwoOperands)
+		err = fmt.Errorf("%w", err)
 		return "", err
 	}
 
