@@ -1,4 +1,4 @@
-package main
+package string_sum
 
 import (
 	"errors"
@@ -26,11 +26,11 @@ var (
 //
 // Use the errors defined above as described, again wrapping into fmt.Errorf
 
-func main() {
-	st := "1-1"
-	s, e := StringSum(st)
-	fmt.Println(s, e)
-}
+// func main() {
+// 	st := "1-1"
+// 	s, e := StringSum(st)
+// 	fmt.Println(s, e)
+// }
 
 func StringSum(input string) (output string, err error) {
 
